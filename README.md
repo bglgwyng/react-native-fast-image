@@ -19,10 +19,18 @@ Performant React Native image component.
 
 <p align="center" >
   <kbd>
-    <img src="https://github.com/DylanVann/react-native-fast-image/raw/master/docs/assets/scroll.gif" title="Scroll Demo" float="left">
+    <img
+      src="https://github.com/DylanVann/react-native-fast-image/blob/main/docs/assets/scroll.gif?raw=true"
+      title="Scroll Demo"
+      float="left"
+    >
   </kbd>
   <kbd>
-    <img src="https://github.com/DylanVann/react-native-fast-image/raw/master/docs/assets/priority.gif" title="Priority Demo" float="left">
+    <img
+      src="https://github.com/DylanVann/react-native-fast-image/blob/main/docs/assets/priority.gif?raw=true"
+      title="Priority Demo"
+      float="left"
+    >
   </kbd>
   <br>
   <em>FastImage example app.</em>
@@ -62,6 +70,7 @@ and
 
 ```bash
 yarn add react-native-fast-image
+cd ios && pod install
 ```
 
 ```jsx
@@ -132,6 +141,13 @@ Headers to load the image with. e.g. `{ Authorization: 'someAuthToken' }`.
 -   `FastImage.cacheControl.immutable` - **(Default)** - Only updates if url changes.
 -   `FastImage.cacheControl.web` - Use headers and follow normal caching procedures.
 -   `FastImage.cacheControl.cacheOnly` - Only show images from cache, do not make any network requests.
+
+---
+
+### `defaultSource?: number`
+
+-   An asset loaded with `require(...)`.
+-   Note that like the built-in `Image` implementation, on Android `defaultSource` does not work in debug mode. This is due to the fact that assets are sent from the dev server, but RN's functions only know how to load it from `res`.
 
 ---
 
@@ -221,6 +237,13 @@ Get image path from cache by `source`
 ```js
 FastImage.getCachePath({ uri: 'https://facebook.github.io/react/img/logo_og.png' })
 ```
+### `FastImage.clearMemoryCache: () => Promise<void>`
+
+Clear all images from memory cache.
+
+### `FastImage.clearDiskCache: () => Promise<void>`
+
+Clear all images from disk cache.
 
 ## Troubleshooting
 

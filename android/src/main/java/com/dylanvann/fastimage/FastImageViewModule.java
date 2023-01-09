@@ -3,6 +3,7 @@ package com.dylanvann.fastimage;
 import android.app.Activity;
 
 import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -29,6 +30,7 @@ class FastImageViewModule extends ReactContextBaseJavaModule {
         super(reactContext);
     }
 
+    @NonNull
     @Override
     public String getName() {
         return REACT_CLASS;
@@ -101,5 +103,33 @@ class FastImageViewModule extends ReactContextBaseJavaModule {
                         .submit();
             }
         });
+    }
+    
+    public void clearMemoryCache(final Promise promise) {
+        final Activity activity = getCurrentActivity();
+        if (activity == null) {
+            promise.resolve(null);
+            return;
+        }
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.get(activity.getApplicationContext()).clearMemory();
+                promise.resolve(null);
+            }
+        });
+    }
+
+    @ReactMethod
+    public void clearDiskCache(Promise promise) {
+        final Activity activity = getCurrentActivity();
+        if (activity == null) {
+            promise.resolve(null);
+            return;
+        }
+
+        Glide.get(activity.getApplicationContext()).clearDiskCache();
+        promise.resolve(null);
     }
 }
