@@ -51,6 +51,8 @@ RCT_EXPORT_METHOD(getCachePath:(nonnull FFFastImageSource *)source
     } else {
         resolve([NSNull null]);
     }
+}
+
 RCT_EXPORT_METHOD(clearMemoryCache:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject)
 {
     [SDImageCache.sharedImageCache clearMemory];

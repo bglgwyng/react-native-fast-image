@@ -17,6 +17,8 @@ import {
     ColorValue,
 } from 'react-native'
 
+const FastImageViewNativeModule = NativeModules.FastImageView
+
 export type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center'
 
 const resizeMode = {
@@ -232,6 +234,7 @@ export interface FastImageStaticProperties {
     priority: typeof priority
     cacheControl: typeof cacheControl
     preload: (sources: Source[]) => void
+    getCachePath: (source: Source) => Promise<string>
     clearMemoryCache: () => Promise<void>
     clearDiskCache: () => Promise<void>
 }
